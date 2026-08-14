@@ -31,7 +31,7 @@ void BM25Index::add_document(std::string document_id, std::string_view text) {
         throw std::invalid_argument("document id must be unique");
     }
 
-    Document document{.id = std::move(document_id)};
+    Document document{.id = std::move(document_id), .frequencies = {}, .length = 0};
     std::unordered_set<std::string> unique_terms;
     for (auto& token : tokenize(text)) {
         ++document.frequencies[token];
